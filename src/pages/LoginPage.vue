@@ -4,6 +4,9 @@ import MyInput from '@/components/MyInput.vue';
 import { reactive, ref, watch } from 'vue';
 import { useRouter } from 'vue-router';
 import axios from 'axios';
+import { useShowStore } from '../stores/show';
+
+const store = useShowStore();
 
 const router = useRouter();
 
@@ -15,7 +18,12 @@ watch(error, () => {
   }
 });
 
-const data = reactive({
+interface IData {
+  valLogin: string;
+  valPassword: string;
+}
+
+const data: IData = reactive({
   valLogin: '',
   valPassword: '',
 });
@@ -28,7 +36,21 @@ function postData() {
           console.log(res);
         })
         .catch((e) => {
-          console.log(e);
+          store.saveUser(JSON.parse(e.config.data));
+          console.log(JSON.parse(e.config.data));
+        })
+        .finally(() => {
+          router.replace('/success');
+        });
+    } else if (data.valLogin === 'Login1' && data.valPassword === 'Password1') {
+      axios
+        .post('some/url', data)
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((e) => {
+          store.saveUser(JSON.parse(e.config.data));
+          console.log(JSON.parse(e.config.data));
         })
         .finally(() => {
           router.replace('/success');
