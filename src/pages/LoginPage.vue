@@ -55,7 +55,7 @@ function postData() {
       <form class="modal-form" @submit.prevent="postData()">
         <my-input type="text" placeholder="Login" v-model="data.valLogin" />
         <my-input
-          type="text"
+          type="password"
           placeholder="Password"
           v-model="data.valPassword"
         />
