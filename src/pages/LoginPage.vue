@@ -37,7 +37,6 @@ function postData() {
         })
         .catch((e) => {
           store.saveUser(JSON.parse(e.config.data));
-          console.log(JSON.parse(e.config.data));
         })
         .finally(() => {
           router.replace('/success');
@@ -50,7 +49,6 @@ function postData() {
         })
         .catch((e) => {
           store.saveUser(JSON.parse(e.config.data));
-          console.log(JSON.parse(e.config.data));
         })
         .finally(() => {
           router.replace('/success');
