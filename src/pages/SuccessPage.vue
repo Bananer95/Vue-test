@@ -9,6 +9,8 @@ const router = useRouter();
 const store = useShowStore();
 let intervalID: number | undefined;
 
+document.title = 'SuccessPage';
+
 watch(secBtn, () => {
   if (secBtn.value < 0) {
     store.changeShow();
@@ -27,26 +29,27 @@ function goToMainPage(): void {
   router.push('/');
   store.changeShow();
 }
+console.log();
 </script>
 
 <template>
   <button @click="$router.push('/login')" class="btn_main">
     Открыть окно входа
   </button>
-  <div class="background">
-    <div class="modal">
-      <div class="modal-header">
-        <h4>Success</h4>
-        <button @click="goToMainPage()">X</button>
-      </div>
-      <div class="modal-form">
-        <h2>Success</h2>
-        <my-button @click="goToMainPage()" text="Закрыть">{{
-          `(${secBtn})`
-        }}</my-button>
-      </div>
-    </div>
-  </div>
+  <my-modal>
+    <template #modal-header>
+      <h4>Success</h4>
+      <button @click="goToMainPage()">X</button>
+    </template>
+    <template #modal-body>
+      <h2>Success</h2>
+    </template>
+    <template #modal-footer>
+      <my-button @click="goToMainPage()" class="btn"
+        >Закрыть({{ secBtn }})</my-button
+      >
+    </template>
+  </my-modal>
 </template>
 
 <style scoped>
@@ -70,6 +73,9 @@ function goToMainPage(): void {
   height: 400px;
   background-color: #fff;
 }
+.btn_main {
+  margin: 10px 0px 0px 20px;
+}
 .modal-header {
   padding: 2px;
   display: flex;
@@ -84,8 +90,9 @@ function goToMainPage(): void {
   width: 50%;
   margin: auto;
 }
-.btn_main {
-  margin: 10px 0px 0px 20px;
+.btn {
+  margin: auto;
+  width: 40%;
 }
 
 .modal-form h2 {

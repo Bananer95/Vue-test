@@ -6,6 +6,9 @@ import { useShowStore } from '@/stores/show';
 const store = useShowStore();
 const router = useRouter();
 const user = store.user.login;
+
+document.title = 'MainPage';
+
 function goToLogin(): void {
   router.push('/login');
 }
@@ -15,12 +18,9 @@ function goToLogin(): void {
   <div>
     <div>
       <h1 v-if="store.showTitle" class="title">Добро пожаловать {{ user }}</h1>
-      <my-button
-        class="btn_main"
-        v-else
-        @click="goToLogin()"
-        text="Открыть окно входа"
-      ></my-button>
+      <my-button class="btn_main" v-else @click="goToLogin()"
+        >Открыть окно входа</my-button
+      >
     </div>
   </div>
 </template>

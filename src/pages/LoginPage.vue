@@ -12,6 +12,8 @@ const router = useRouter();
 
 let error = ref(false);
 
+document.title = 'LoginPage';
+
 watch(error, () => {
   if (error.value) {
     setTimeout(() => (error.value = !error.value), 3000);
@@ -61,55 +63,31 @@ function postData() {
 </script>
 
 <template>
-  <my-button
-    class="btn_main"
-    @click="$router.push('/login')"
-    text="Открыть окно входа"
-  ></my-button>
-  <div class="background">
-    <div class="modal">
-      <div class="modal-header">
-        <h4>login</h4>
-        <my-button @click="$router.back" text="X"></my-button>
-      </div>
-      <form class="modal-form" @submit.prevent="postData()">
+  <my-button class="btn_main" @click="$router.push('/login')"
+    >Открыть окно входа</my-button
+  >
+  <my-modal>
+    <template #modal-header
+      ><h4>login</h4>
+      <my-button @click="$router.back">X</my-button></template
+    >
+    <template #modal-body>
+      <form class="modal-form" @submit.prevent id="login">
         <my-input type="text" placeholder="Login" v-model="data.valLogin" />
         <my-input
           type="password"
           placeholder="Password"
           v-model="data.valPassword"
-        />
-        <my-button text="Submit"></my-button>
-        <div v-show="error" class="modal-error"><h3>Wrong Data</h3></div>
-      </form>
-    </div>
-  </div>
+        /></form
+    ></template>
+    <template #modal-footer>
+      <my-button @click="postData()">Submit</my-button>
+      <div v-show="error" class="modal-error"><h3>Wrong Data</h3></div>
+    </template>
+  </my-modal>
 </template>
 
 <style scoped>
-.background {
-  display: flex;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-}
-.modal {
-  margin: auto;
-  width: 600px;
-  height: 400px;
-  background-color: #fff;
-}
-.modal-header {
-  padding: 2px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin-bottom: 100px;
-  background-color: rgb(228, 228, 228);
-}
 .modal-form {
   display: flex;
   flex-direction: column;
