@@ -8,20 +8,34 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      name: 'home',
+      name: 'MainPage',
       component: MainPageVue,
+      meta: {
+        title: 'Main Page',
+      },
     },
     {
       path: '/login',
-      name: 'login',
+      name: 'LoginPage',
       component: LoginPageVue,
+      meta: {
+        title: 'Login Page',
+      },
     },
     {
       path: '/success',
-      name: 'success',
+      name: 'SuccessPage',
       component: SuccessPageVue,
+      meta: {
+        title: 'Success Page',
+      },
     },
   ],
+});
+
+router.beforeEach((to, from, next): void => {
+  document.title = `${to.meta.title}`;
+  next();
 });
 
 export default router;

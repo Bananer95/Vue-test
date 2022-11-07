@@ -7,8 +7,6 @@ const store = useShowStore();
 const router = useRouter();
 const user = store.user.login;
 
-document.title = 'MainPage';
-
 function goToLogin(): void {
   router.push('/login');
 }

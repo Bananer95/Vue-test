@@ -9,8 +9,6 @@ const router = useRouter();
 const store = useShowStore();
 let intervalID: number | undefined;
 
-document.title = 'SuccessPage';
-
 watch(secBtn, () => {
   if (secBtn.value < 0) {
     store.changeShow();

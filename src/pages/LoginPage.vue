@@ -12,8 +12,6 @@ const router = useRouter();
 
 let error = ref(false);
 
-document.title = 'LoginPage';
-
 watch(error, () => {
   if (error.value) {
     setTimeout(() => (error.value = !error.value), 3000);
